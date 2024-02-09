@@ -1,22 +1,24 @@
-//client-side JavaScript file
+import { getBTCData } from "./API/API.js";
+import { renderMappedStats } from "./server/stats.js";
+import { renderPriceChart } from "./server/priceChart.js";
+import { renderCirculationChart } from "./server/circulationChart.js";
+import { renderProgressBar } from "./server/halving.js";
 
-// Make a GET request to your server endpoint
-BTCdata = () =>
-  fetch("http://localhost:3000/Application") // Replace with your server URL and endpoint
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json(); // Parse the JSON response
-    })
-    .then((data) => {
-      // Handle the data received from the server
-      console.log("Data from server:", data);
-      // Process and use the data as needed in your client-side code
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-      // Handle errors occurred during the fetch operation
-    });
+const fetchBTCData = async () => {
+  try {
+    let data = await getBTCData();
 
-//Call Server every 10 seconds to refresh data.
+    console.log(data);
+
+    await renderMappedStats(data);
+    await renderPriceChart(data);
+    await renderCirculationChart(data);
+    await renderProgressBar(data);
+
+    // If there was no error, clear the previous interval and set a new one
+  } catch (error) {
+    console.error("Error fetching BTC data:", error);
+  }
+};
+
+fetchBTCData();
