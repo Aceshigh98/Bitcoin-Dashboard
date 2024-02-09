@@ -1,7 +1,7 @@
 //client-side JavaScript file
 // Make a GET request to your server endpoint
 const getBTCData = () => {
-  return fetch("http://localhost:3000/BTC") // Replace with your server URL and endpoint
+  return fetch("http:143.198.69.173:3000/BTC") // Replace with your server URL and endpoint
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
