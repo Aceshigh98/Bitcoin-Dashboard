@@ -30,7 +30,7 @@ const fetchBTCData = async () => {
   try {
     let data = await getBTCData();
 
-    console.log(data);
+    //console.log(data);
 
     renderMappedStats(data);
     renderPriceChart(data);
