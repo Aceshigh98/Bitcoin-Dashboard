@@ -3,18 +3,30 @@ const statsBar = (data) => {
 
   if (typeof document !== "undefined") {
     if (data && typeof data === "object") {
-      let JSONdata = data.Data.btcData;
+      let JSONdata = data.btcData;
+      
 
-      let priceElement = document.getElementById("price");
-      let hourHighElement = document.getElementById("24h-h");
-      let hourLowElement = document.getElementById("24h-l");
-      let marketCapElement = document.getElementById("market-cap");
+      //Stats Container Elements
+      let priceElement = document.getElementById("price-stats");
+      let hourHighElement = document.getElementById("24h-h-stats");
+      let hourLowElement = document.getElementById("24h-l-stats");
+      let marketCapElement = document.getElementById("market-cap-stats");
+      let blockHeightStatsElement = document.getElementById("block-height-stats");
+      let blockRewardStatsElement = document.getElementById("block-reward-stats");
+      let circulationStatsElement = document.getElementById("circulating-supply-stats");
+      let hashrateStatsElement = document.getElementById("network-hashrate-stats");
+
+
+      
+      
+      //Mining Container Elements
       let blockRewardElement = document.getElementById("block-reward");
       let blockHeightElement = document.getElementById("block-height");
       let valueElement = document.getElementById("value");
+
+      //Hashrate Container Elements
       let hashrateElement1 = document.getElementById("hashrate1");
       let hashrateElement2 = document.getElementById("hashrate2");
-
       let blockHeight = JSONdata.block_height;
       let blockValue = JSONdata.block_reward * JSONdata.price;
       let hashrateTHS = (JSONdata.hashrate / divideHash).toFixed(2);
@@ -26,7 +38,10 @@ const statsBar = (data) => {
         marketCapElement &&
         blockRewardElement &&
         blockHeightElement &&
-        valueElement
+        valueElement &&
+        circulationStatsElement &&
+        blockRewardStatsElement &&
+        blockHeightStatsElement
       ) {
         priceElement.textContent = `$` + JSONdata.price.toLocaleString("en-US");
         hourHighElement.textContent =
@@ -46,6 +61,15 @@ const statsBar = (data) => {
 
         hashrateElement1.textContent = hashrateTHS;
         hashrateElement2.textContent = hashrateTHS;
+
+        circulationStatsElement.textContent = JSONdata.circulating_supply.toLocaleString("en-US");
+
+        blockRewardStatsElement.textContent = JSONdata.block_reward.toLocaleString("en-US");
+
+        blockHeightStatsElement.textContent = JSONdata.block_height.toLocaleString("en-US");
+
+        hashrateStatsElement.textContent =  `TH/S `+hashrateTHS;
+
       } else {
         console.error("One or more HTML elements not found");
       }

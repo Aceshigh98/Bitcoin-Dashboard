@@ -2,32 +2,23 @@ const priceChart = (data) => {
   if (typeof document !== "undefined") {
     const ctx = document.getElementById("line-chart");
 
-    const dataRoute = data.Data.btcData;
+    const dataRoute = data.btcData;
+    const timeArr = dataRoute.time;
+    const priceArr = dataRoute.price_array;
 
-    const max = Math.max(...dataRoute.price_array);
-    const min = Math.min(...dataRoute.price_array);
+    const max = Math.max(...priceArr);
+    const min = Math.min(...priceArr);
 
-    // Function to generate month names for labels
-    const getMonthNames = () => {
-      const months = [];
-      const currentDate = new Date();
-      for (let i = 0; i < 7; i++) {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        months.unshift(
-          currentDate.toLocaleString("default", { month: "long" })
-        );
-      }
-      return months;
-    };
+    console.log(max,min,priceArr);
 
     // Chart data
-    const labels = getMonthNames();
+    const time = (timeArr);
     const info = {
-      labels: labels,
+      labels: time,
       datasets: [
         {
           label: "Bitcoin Price",
-          data: dataRoute.price_array,
+          data: priceArr,
           borderColor: "white",
           borderWidth: 5,
         },
@@ -45,7 +36,7 @@ const priceChart = (data) => {
             font: {
               family: "Arial", // Set font family
               weight: "bold", // Set font weight
-              size: 20,
+              size: 15,
             },
           },
         },
@@ -65,8 +56,8 @@ const priceChart = (data) => {
       scales: {
         y: {
           // defining min and max so hiding the dataset does not change scale range
-          min: min - 5,
-          max: max + 5,
+          min: min - 20,
+          max: max + 20,
           ticks: {
             color: "white", // Change Y-axis label font color
           },

@@ -1,6 +1,6 @@
 const circulationChart = (data) => {
   if (typeof document !== "undefined") {
-    const dataRoute = data.Data.btcData;
+    const dataRoute = data.btcData;
 
     const ctx = document.getElementById("c-chart");
     let labelC = document.getElementById("btc-c");

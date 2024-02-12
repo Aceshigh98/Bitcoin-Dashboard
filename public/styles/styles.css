@@ -715,9 +715,23 @@ body {
 
 .footer-link box-icon {
   margin-top: 5px;
-  cursor: pointer;
   width: 25px;
   height: 25px;
+}
+
+.footer-link a {
+  text-align: center;
+  align-items: center;
+  font-size: 1.7rem;
+  color: var(--text-color);
+  font-weight: bold;
+  margin: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.footer-link a:hover {
+  color: var(--bg-color);
 }
 
 /*API.html */
@@ -726,9 +740,13 @@ body {
   display: flex;
   flex-direction: column;
   width: auto;
-  height: auto;
+  height: 100vh;
 }
 
 .API-text * {
   margin: 1rem;
+}
+
+.API-text p {
+  font-size: large;
 }
