@@ -47,8 +47,8 @@ app.get("/btcdata", async (req, res) => {
 });
 
 // SSL configuration
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/your-domain.com/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/your-domain.com/fullchain.pem', 'utf8');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/www.aceshighbitcoin.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/www.aceshighbitcoin.com/fullchain.pem', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 // Start the server with SSL
