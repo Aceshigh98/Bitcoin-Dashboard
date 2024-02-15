@@ -6,6 +6,8 @@ dotenv.config();
 import express from 'express';
 import fetch from 'node-fetch'; // Ensure you're using a version of node-fetch that supports ESM
 import cors from 'cors';
+import https from 'https';
+import fs from 'fs';
 
 // Initialize express app
 const app = express();
@@ -44,8 +46,14 @@ app.get("/btcdata", async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(443, () => {
+// SSL configuration
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/your-domain.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/your-domain.com/fullchain.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+// Start the server with SSL
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443, () => {
   console.log("Server is running on port 443");
 });
 
