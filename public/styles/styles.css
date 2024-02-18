@@ -750,3 +750,16 @@ body {
 .API-text p {
   font-size: large;
 }
+
+/*About.html*/
+
+.About-text {
+  height: 100vh;
+}
+
+@media screen and (max-width: 600px) {
+  .About-text {
+    font-size: smaller;
+    height: 100vh;
+  }
+}
