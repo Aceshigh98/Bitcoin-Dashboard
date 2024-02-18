@@ -68,7 +68,7 @@ const statsBar = (data) => {
 
         blockHeightStatsElement.textContent = JSONdata.block_height.toLocaleString("en-US");
 
-        hashrateStatsElement.textContent =  `TH/S `+hashrateTHS;
+        hashrateStatsElement.textContent =  `EH/S `+hashrateTHS;
 
       } else {
         console.error("One or more HTML elements not found");
