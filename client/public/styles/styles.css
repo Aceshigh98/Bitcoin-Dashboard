@@ -1,0 +1,765 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --bg-color: black;
+  --second-bg-color: #f6931a;
+  --text-color: white;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  z-index: -3;
+}
+
+/* Loading screen styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black; /* White with full opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 6s ease; /* Transition for opacity change */
+  z-index: 500;
+}
+
+.loader {
+  border: 6px solid var(--second-bg-color);
+  border-top: 6px solid var(--text-color);
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hide the loading screen when the content is loaded */
+.loaded .loading-screen {
+  opacity: 0; /* Set opacity to 0 when loaded */
+  pointer-events: none; /* Disable pointer events on the loading screen */
+  transition: opacity 6s ease; /* Transition for opacity change */
+}
+
+/*3dModel CSS*/
+
+#Model {
+  position: fixed;
+  background: transparent;
+  left: 30%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+#Model2 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+@media (max-width: 800px) {
+  #Model {
+    display: none;
+  }
+}
+
+/*Divider Styles*/
+
+.divider {
+  display: flex;
+  margin-left: 45px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  left: 15%;
+  width: 250px;
+  height: 6px;
+  background: linear-gradient(90deg, black, #f6931a);
+  border-radius: 2rem;
+  transition: width 0.3s ease-in-out; /* Added transition property */
+}
+
+.divider:hover {
+  width: 350px;
+}
+
+/*Header CC*/
+
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem 9%;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(0deg, black, #f6931a);
+  z-index: 100;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.nav-div {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 150px;
+  height: 75px;
+  align-items: center;
+  text-align: center;
+}
+
+#nav-img {
+  width: 50px;
+  height: 20px;
+  color: white;
+}
+
+.navbar a {
+  text-align: center;
+  align-items: center;
+  font-size: 1.7rem;
+  color: var(--text-color);
+  font-weight: bold;
+  margin: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.navbar a:hover {
+  color: var(--bg-color);
+}
+
+@media screen and (max-width: 600px) {
+  .navbar a {
+    font-size: 16px;
+    margin: 1rem;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .nav-div {
+    width: 75px;
+  }
+}
+
+/*Hero CSS*/
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 12rem;
+}
+
+.menu-icon {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  color: var(--second-bg-color);
+  cursor: pointer;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.menu-icon:hover {
+  animation: spin 0.5s linear;
+}
+
+.hero-menu {
+  /* Hide the menu by default */
+  position: fixed;
+  top: 16rem; /* Adjust as needed to position the menu below the icon */
+  left: 0;
+  background-color: #f6931a;
+  width: 150px;
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure the menu appears above other elements */
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: top right; /* Set the transform origin to control the scaling direction */
+  transform: scaleY(0) translateX(0); /* Initially set the scale to 0.8 to make it appear scaled down */
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s,
+    transform 0.5s ease; /* Add transform property for animation */
+}
+
+/* Style the menu links */
+.hero-menu a {
+  display: block;
+  font-size: large;
+  font-weight: bold;
+  border-bottom: 10px;
+  cursor: pointer;
+  padding: 15px;
+  border-bottom: 1px solid transparent;
+  color: black;
+  transition: border-bottom-color 0.5s ease;
+  transform: scaleY(1); /* Counteract the parent's scaleY transformation */
+  transition: transform 0.3s ease;
+}
+
+.hero-menu a:hover {
+  color: white; /* Change link color on hover */
+  border-bottom-color: white;
+}
+
+/* Style the menu when in the active state */
+.hero-menu.active {
+  display: block; /* Show the menu when it has the 'active' class */
+  opacity: 1; /* Set opacity to 1 when menu is active */
+  visibility: visible; /* Make the menu visible */
+  transition: opacity 0.8s ease-in-out, visibility 0s linear,
+    transform 0.8s ease; /* Apply transition to transform property */
+  transform: scaleY(1); /* Apply scale of 1 (normal size) when menu is active */
+}
+
+/*Page containers*/
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1rem;
+  max-width: 100%;
+  height: fit-content;
+}
+
+/*Main Stats Page*/
+
+.main-stats {
+  display: flex;
+  margin-top: 4rem;
+  margin-left: 6rem;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Adjust alignment to flex-start */
+  border-radius: 2rem;
+  background: transparent;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 2rem;
+  justify-content: space-between;
+  height: fit-content;
+  /* Remove fixed height to allow expansion based on content */
+  /* height: 10rem; Remove this line */
+}
+
+.main-stats-inner {
+  /* Adjust width to allow responsive expansion */
+  width: 200px; /* Adjust width based on the desired layout */
+  /* Use calc() to consider margins and paddings */
+  height: 75px;
+  /* Other styles remain the same */
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 1rem;
+  flex-direction: column;
+  background-color: var(--second-bg-color);
+  border-radius: 2rem;
+  box-shadow: 0px 0px 15px rgb(245, 146, 26);
+  transition: box-shadow 0.8s ease;
+}
+
+.main-stats-inner:hover {
+  box-shadow: 0px 0px 30px white;
+}
+
+@media screen and (max-width: 600px) {
+  .main-stats-inner {
+    font-size: 8px;
+    align-items: center;
+  }
+
+  .main-stats {
+    align-items: center;
+    justify-content: center;
+    width: 210px;
+    margin: auto;
+  }
+}
+
+/*Price-Chart CSS*/
+
+.price-chart {
+  width: 700px;
+  height: 350px;
+  margin: 2rem;
+  margin-left: 6rem;
+  border-radius: 2rem;
+  background: linear-gradient(180deg, #f6931a, hsl(33, 100%, 5%));
+  box-shadow: 0px 0px 15px rgb(245, 146, 26);
+  transition: box-shadow 0.8s ease;
+}
+
+.price-chart:hover {
+  box-shadow: 0px 0px 25px hwb(0 100% 0%);
+}
+
+@media screen and (max-width: 600px) {
+  .price-chart {
+    width: 350px;
+    height: 250px;
+    margin: auto;
+  }
+}
+
+/*Circ-Chart CSS*/
+
+.circ-chart {
+  width: 400px;
+  height: 400px;
+  padding: 30px;
+  margin: 2rem;
+  margin-left: 6rem;
+  border-radius: 2rem;
+  background: linear-gradient(180deg, #f6931a, hsl(33, 100%, 5%));
+  box-shadow: 0px 0px 15px rgb(245, 146, 26);
+  transition: box-shadow 0.8s ease;
+}
+
+.circ-chart:hover {
+  box-shadow: 0px 0px 25px hwb(0 100% 0%);
+}
+
+.c-text {
+  width: 500px;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+  margin: 60px;
+  letter-spacing: 2px;
+}
+
+#supply-h {
+  font-size: xx-large;
+  color: #f6931a;
+}
+
+#supply-p {
+  margin-top: 25px;
+  font-size: larger;
+}
+
+#btc-c,
+#btc-m {
+  color: #f6931a;
+}
+
+@media screen and (max-width: 600px) {
+  .circ-chart {
+    width: 350px;
+    height: 250px;
+    margin: auto;
+  }
+
+  .c-text {
+    width: 500px;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    margin: auto;
+    margin: 2rem;
+  }
+  #supply-h {
+    font-size: larger;
+  }
+
+  #supply-p {
+    margin-top: 25px;
+    font-size: large;
+    margin: 25px;
+  }
+}
+
+/*Mining Profits Section*/
+
+.m-text {
+  width: 600px;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+  margin: 60px;
+  letter-spacing: 2px;
+}
+
+#m-p {
+  margin-top: 25px;
+  font-size: large;
+  margin: 25px;
+}
+
+#m-h1 {
+  font-size: x-large;
+  color: #f6931a;
+  font-weight: bolder;
+}
+
+#m-h3 {
+  font-size: large;
+}
+
+#block-reward {
+  color: #f6931a;
+}
+
+#block-height {
+  color: #f6931a;
+}
+
+#value {
+  color: #f6931a;
+}
+
+#miner-pic {
+  margin-top: 25px;
+}
+
+/*Hashrate Section*/
+
+#hashrate1,
+#hashrate2 {
+  color: #f6931a;
+}
+
+#h-h1 {
+  color: #f6931a;
+}
+
+#h-h3 {
+  margin: 15px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#world {
+  animation: rotate 5s linear infinite;
+}
+
+/*Halfing Section*/
+
+#prog-chart {
+  height: 400px;
+  width: 400px;
+}
+
+.ha-text {
+  width: 300px;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+  margin: 60px;
+  letter-spacing: 2px;
+}
+
+#h-days,
+#h-blocksleft {
+  color: #f6931a;
+}
+
+.ha-text p {
+  margin: 2rem;
+}
+
+/*Projects Section*/
+
+.card-container {
+  display: flex;
+  margin: 3rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card-container h1 {
+  margin: 2rem;
+  color: #f6931a;
+  letter-spacing: 2px;
+  font-weight: bolder;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+  height: 325px;
+  width: 250px;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgb(245, 146, 26);
+  transition: box-shadow 0.8s ease;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 25px hwb(0 100% 0%);
+}
+
+.bitcoin-img-text {
+  position: absolute;
+  color: #f6931a;
+  font-weight: bold;
+  width: 100%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+@keyframes moveY {
+  from {
+    width: 100%;
+    height: 0%;
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes reverseMoveY {
+  from {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+  to {
+    width: 100%;
+    height: 0%;
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.card:hover .bitcoin-img-text {
+  border-radius: 2rem;
+  animation: moveY 2s forwards;
+}
+
+.card:not(:hover) .bitcoin-img-text {
+  border-radius: 2rem;
+  animation: reverseMoveY 2s forwards;
+}
+
+.bitcoin-img {
+  width: 100%;
+  height: 320px;
+  border-radius: 2rem;
+}
+
+.bitcoin-img-text p {
+  height: auto;
+  width: auto;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: small;
+  text-align: left;
+}
+
+.card-head-img {
+  width: 80px;
+  height: 25px;
+  margin: auto;
+}
+
+.card-head-img-nostr {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+.project-link {
+  cursor: pointer;
+  color: white;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+/*Footer CSS*/
+
+.footer {
+  left: 0;
+  bottom: 0;
+  display: flex;
+  height: 12rem;
+  overflow: hidden;
+  width: 100%;
+  background: linear-gradient(0deg, #f6931a, black);
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 15rem;
+    overflow: hidden;
+    width: 100%;
+    background: linear-gradient(0deg, #f6931a, black);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .footer-text {
+    font-weight: 100;
+    font-size: xx-small;
+  }
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: center;
+  justify-content: center;
+  font-size: small;
+  font-weight: bold;
+  justify-content: space-around;
+  width: auto;
+  margin: auto;
+}
+
+.footer-text {
+  display: flex;
+  width: auto;
+  height: auto;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-wrap: nowrap;
+}
+
+.footer-text img {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+
+.footer-link {
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+}
+
+.footer-link box-icon {
+  margin-top: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+.footer-link a {
+  text-align: center;
+  align-items: center;
+  font-size: 1.7rem;
+  color: var(--text-color);
+  font-weight: bold;
+  margin: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.footer-link a:hover {
+  color: var(--bg-color);
+}
+
+/*API.html */
+
+.API-text {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 100vh;
+}
+
+.API-text * {
+  margin: 1rem;
+}
+
+.API-text p {
+  font-size: large;
+}
+
+/*About.html*/
+
+.About-text {
+  height: 100vh;
+}
+
+@media screen and (max-width: 600px) {
+  .About-text {
+    font-size: smaller;
+    height: 100vh;
+  }
+}

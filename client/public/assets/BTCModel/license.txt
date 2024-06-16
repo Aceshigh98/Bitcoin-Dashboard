@@ -1,0 +1,11 @@
+Model Information:
+* title:	BitCoin Logo 3D
+* source:	https://sketchfab.com/3d-models/bitcoin-logo-3d-802c7b58653a4801a84b7715d0404f00
+* author:	Nofil.Khan (https://sketchfab.com/Nofil.Khan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "BitCoin Logo 3D" (https://sketchfab.com/3d-models/bitcoin-logo-3d-802c7b58653a4801a84b7715d0404f00) by Nofil.Khan (https://sketchfab.com/Nofil.Khan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

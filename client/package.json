@@ -1,0 +1,23 @@
+{
+  "name": "api_test",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.cjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apexcharts": "^3.45.2",
+    "boxicons": "^2.1.4",
+    "chart.js": "^4.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.2",
+    "three": "^0.161.0"
+  }
+}
