@@ -1,6 +1,6 @@
 #
 #root
-env
+env/
 
 #backend
 backend/node_modules
@@ -11,4 +11,4 @@ client/node_modules
 client/package-lock.json
 
 #docker
-Docker/docker.compose.local.yml
+Docker/docker-compose.local.yml

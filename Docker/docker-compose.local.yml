@@ -1,6 +1,6 @@
 services:
   server:
-    build: './server'
+    build: './server/Docker/Dockerfile.local'
     container_name: 'server'
     stdin_open: true
     tty: true
@@ -12,7 +12,7 @@ services:
       - mongodb
 
     client:
-      build: './client'
+      build: './client/Docker/Dockerfile.local'
       container_name: 'client'
       stdin_open: true
       tty: true
