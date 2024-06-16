@@ -9,3 +9,6 @@ backend/package-lock.json
 #frontend
 client/node_modules/
 client/package-lock.json
+
+#docker
+Docker/docker.compose.local.yml
