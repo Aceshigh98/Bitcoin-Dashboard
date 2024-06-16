@@ -1,6 +1,6 @@
 #
 #root
-keys/
+env/
 
 #backend
 backend/node_modules/
