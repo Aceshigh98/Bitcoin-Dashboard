@@ -1,0 +1,11 @@
+#
+#root
+keys/
+
+#backend
+backend/node_modules/
+backend/package-lock.json
+
+#frontend
+client/node_modules/
+client/package-lock.json
