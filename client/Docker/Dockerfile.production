@@ -19,7 +19,7 @@ ENV HTTPS=true
 RUN npm install
 
 # Make port 3000 available to the world outside this container
-EXPOSE 3000
+EXPOSE 2501
 
 # Do not use until production ready.
 # Install serve to serve the static files.
