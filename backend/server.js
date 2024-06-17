@@ -3,10 +3,10 @@
 // Import necessary modules
 import express from "express";
 import cors from "cors";
-import { store } from "./store/store.js";
+import { store } from "./src/store/store.js";
 
 const app = express();
-const port = PORT || 80;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 

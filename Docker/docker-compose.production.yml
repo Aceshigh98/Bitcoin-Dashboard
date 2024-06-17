@@ -1,0 +1,39 @@
+services:
+  server:
+    build:
+      context: ../backend
+      dockerfile: Docker/Dockerfile.local
+    container_name: 'server'
+    stdin_open: true
+    tty: true
+    env_file:
+      - ../env/.env.local
+
+  client:
+    build:
+      context: ../client
+      dockerfile: Docker/Dockerfile.local
+    container_name: 'client'
+    stdin_open: true
+    tty: true
+    env_file:
+      - ../env/.env.local
+
+    depends_on:
+      - server
+
+  nginx:
+    image: nginx:latest
+    container_name: 'nginx'
+    ports:
+      - '80:80'
+      - '443:443'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server
+      - client
+    # Uncomment and set these volumes if needed
+    volumes:
+      - ../Nginx/ssl:/etc/letsencrypt/live/www.aceshighbitcoin.com
+      - ../Nginx/production/nginx.conf:/etc/nginx/nginx.conf
