@@ -16,4 +16,4 @@ client/Docker/Dockerfile.local
 Docker/docker-compose.local.yml
 
 #Nginx
-Nginx/local/nginx.conf
+nginx/local/*
