@@ -19,7 +19,7 @@ ENV HTTPS=true
 RUN npm install
 
 # Make port 5000 available to the world outside this container
-EXPOSE 2500
+EXPOSE 5000
 
 # Run the server
 CMD ["node", "server.js"]
