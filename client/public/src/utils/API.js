@@ -7,7 +7,7 @@ import { renderCirculationChart } from "../scripts/circulationChart.js";
 import { renderProgressBar } from "../scripts/halving.js";
 
 const getBTCData = () => {
-  return fetch("https://aceshighbitcoin.com/data") // Replace with your server URL and endpoint
+  return fetch("https://api.aceshighbitcoin.com/data") // Replace with your server URL and endpoint
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
