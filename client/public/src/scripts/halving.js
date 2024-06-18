@@ -1,12 +1,11 @@
 const progressBar = (data) => {
   if (typeof document !== "undefined") {
-    const dataRoute = data.btcData;
+    const dataRoute = data;
 
     const halvingPercentage = claculateHalving(dataRoute.block_height);
 
     let halvingDaysElement = document.getElementById("h-days");
     let blocksLeftElement = document.getElementById("h-blocksleft");
-    
 
     let blocksLeft = calculateBlocks(dataRoute.block_height);
     let daysLeft = calculateDays(blocksLeft);
@@ -17,7 +16,7 @@ const progressBar = (data) => {
     if (halvingDaysElement && blocksLeftElement) {
       blocksLeftElement.textContent = blocksLeft;
       halvingDaysElement.textContent = daysLeft;
-     } else {
+    } else {
       console.error("One or more HTML elements not found");
     }
 

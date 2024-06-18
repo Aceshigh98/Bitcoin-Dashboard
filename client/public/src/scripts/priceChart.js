@@ -2,17 +2,14 @@ const priceChart = (data) => {
   if (typeof document !== "undefined") {
     const ctx = document.getElementById("line-chart");
 
-    const dataRoute = data.btcData;
+    const dataRoute = data;
     const timeArr = dataRoute.time;
     const priceArr = dataRoute.price_array;
 
     const max = Math.max(...priceArr);
     const min = Math.min(...priceArr);
-
-    console.log(max,min,priceArr);
-
     // Chart data
-    const time = (timeArr);
+    const time = timeArr;
     const info = {
       labels: time,
       datasets: [

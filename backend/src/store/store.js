@@ -3,10 +3,25 @@ import { API_MinerStat_Call } from "../utils/MinerStat_API.js";
 import { API_BlockChainData_Call } from "../utils/BlockChainData_API.js";
 
 const dataArrMaxLength = 8;
+// Create an object to store the Bitcoin data
 
-let priceArr = [];
-let timeArr = [];
-let callCounter = 0;
+let data = {
+  name: "",
+  price: 0,
+  price_array: [],
+  market_cap: 0,
+  ath: 0,
+  daily_high: 0,
+  daily_low: 0,
+  circulating_supply: 0,
+  algorithm: "",
+  hashrate: 0,
+  block_reward: 0,
+  block_height: 0,
+  total_block_reward: 0,
+  time: [],
+  API_Call_Count: 0,
+};
 
 async function fetchDataFromAPIs() {
   try {
@@ -21,32 +36,28 @@ async function fetchDataFromAPIs() {
 }
 
 function mapBTCObject(dataCoinGecko, dataMinerStat, dataBlockChain) {
-  return {
-    name: dataCoinGecko.name,
-    price: dataCoinGecko.current_price,
-    price_array: priceArr,
-    market_cap: dataCoinGecko.market_cap,
-    ath: dataCoinGecko.ath,
-    daily_high: dataCoinGecko.high_24h,
-    daily_low: dataCoinGecko.low_24h,
-    circulating_supply: dataCoinGecko.circulating_supply,
-    algorithm: dataMinerStat.algorithm,
-    hashrate: dataMinerStat.network_hashrate,
-    block_reward: dataMinerStat.reward_block,
-    block_height: dataBlockChain.height,
-    total_block_reward: dataMinerStat.reward,
-    time: timeArr,
-    API_Call_Count: callCounter,
-  };
+  data.name = dataCoinGecko.name;
+  data.price = dataCoinGecko.current_price;
+  data.market_cap = dataCoinGecko.market_cap;
+  data.ath = dataCoinGecko.ath;
+  data.daily_high = dataCoinGecko.high_24h;
+  data.daily_low = dataCoinGecko.low_24h;
+  data.circulating_supply = dataCoinGecko.circulating_supply;
+  data.algorithm = dataMinerStat.algorithm;
+  data.hashrate = dataMinerStat.network_hashrate;
+  data.block_reward = dataMinerStat.reward_block;
+  data.block_height = dataBlockChain.height;
+  data.total_block_reward = dataMinerStat.reward;
+  data.API_Call_Count = data.callCounter;
 }
 
 //Updating price array
 
-function updatePriceArray(dataCoinGecko) {
-  if (priceArr.length === dataArrMaxLength) {
-    priceArr.shift(); // Remove the oldest element
+function updatePriceArray(price) {
+  if (data.price_array.length === dataArrMaxLength) {
+    data.price_array.shift(); // Remove the oldest element
   }
-  priceArr.push(dataCoinGecko.current_price);
+  data.price_array.push(price);
 }
 
 //Updating time array
@@ -54,21 +65,18 @@ function updatePriceArray(dataCoinGecko) {
 function updateTimeArray() {
   let time = getTime();
 
-  if (timeArr.length === dataArrMaxLength) {
-    timeArr.shift(); // Remove the oldest element
+  if (data.time.length === dataArrMaxLength) {
+    data.time.shift(); // Remove the oldest element
   }
-  timeArr.push(time);
+  data.time.push(time);
 }
 
 async function store() {
   try {
-    callCounter++;
-    console.log(`Store function called ${callCounter} times.`);
-
     const { dataCoinGecko, dataMinerStat, dataBlockChain } =
       await fetchDataFromAPIs();
 
-    updatePriceArray(dataCoinGecko);
+    updatePriceArray(dataCoinGecko.current_price);
     updateTimeArray();
 
     const BTCObject = mapBTCObject(
@@ -76,13 +84,6 @@ async function store() {
       dataMinerStat,
       dataBlockChain
     );
-
-    //Log the retrieved Bitcoin data
-    //console.log(dataCoinGecko);
-    //console.log(dataMinerStat);
-    //console.log(dataBlockChain);
-    //console.log(BTCObject);
-
     return BTCObject;
   } catch (error) {
     console.error(error.message);
@@ -90,12 +91,7 @@ async function store() {
   }
 }
 
-// Call initially then Update the store every 20 seconds
-
-setInterval(async () => {
-  await store();
-}, 300000);
-
+// Get the current time in the format HH:MM AM/PM
 const getTime = () => {
   // Create a date object.
   let time = new Date();
@@ -112,4 +108,21 @@ const getTime = () => {
   return formattedTime;
 };
 
-export { store };
+const execute = () => {
+  const time = getTime();
+  // Get the minutes from the time string
+  let num = time.split(":")[1].split(" ")[0];
+  // Check if the minutes are divisible by 5
+  if (num % 5 === 0) {
+    // Code to execute if the remainder is 0
+    store();
+  }
+};
+
+// Call initially then Update the store every 20 seconds
+store();
+
+// Call the store function every 60 seconds
+setInterval(execute, 60000);
+
+export { data };

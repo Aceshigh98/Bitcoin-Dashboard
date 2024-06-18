@@ -3,22 +3,24 @@ const statsBar = (data) => {
 
   if (typeof document !== "undefined") {
     if (data && typeof data === "object") {
-      let JSONdata = data.btcData;
-      
+      let JSONdata = data;
 
       //Stats Container Elements
       let priceElement = document.getElementById("price-stats");
       let hourHighElement = document.getElementById("24h-h-stats");
       let hourLowElement = document.getElementById("24h-l-stats");
       let marketCapElement = document.getElementById("market-cap-stats");
-      let blockHeightStatsElement = document.getElementById("block-height-stats");
-      let blockRewardStatsElement = document.getElementById("block-reward-stats");
-      let circulationStatsElement = document.getElementById("circulating-supply-stats");
-      let hashrateStatsElement = document.getElementById("network-hashrate-stats");
+      let blockHeightStatsElement =
+        document.getElementById("block-height-stats");
+      let blockRewardStatsElement =
+        document.getElementById("block-reward-stats");
+      let circulationStatsElement = document.getElementById(
+        "circulating-supply-stats"
+      );
+      let hashrateStatsElement = document.getElementById(
+        "network-hashrate-stats"
+      );
 
-
-      
-      
       //Mining Container Elements
       let blockRewardElement = document.getElementById("block-reward");
       let blockHeightElement = document.getElementById("block-height");
@@ -62,14 +64,16 @@ const statsBar = (data) => {
         hashrateElement1.textContent = hashrateTHS;
         hashrateElement2.textContent = hashrateTHS;
 
-        circulationStatsElement.textContent = JSONdata.circulating_supply.toLocaleString("en-US");
+        circulationStatsElement.textContent =
+          JSONdata.circulating_supply.toLocaleString("en-US");
 
-        blockRewardStatsElement.textContent = JSONdata.block_reward.toLocaleString("en-US");
+        blockRewardStatsElement.textContent =
+          JSONdata.block_reward.toLocaleString("en-US");
 
-        blockHeightStatsElement.textContent = JSONdata.block_height.toLocaleString("en-US");
+        blockHeightStatsElement.textContent =
+          JSONdata.block_height.toLocaleString("en-US");
 
-        hashrateStatsElement.textContent =  `EH/S `+hashrateTHS;
-
+        hashrateStatsElement.textContent = `EH/S ` + hashrateTHS;
       } else {
         console.error("One or more HTML elements not found");
       }

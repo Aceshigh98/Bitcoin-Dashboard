@@ -7,7 +7,7 @@ services:
     stdin_open: true
     tty: true
     env_file:
-      - ../env/.env.local
+      - ../env/.env.production
 
   client:
     build:
@@ -17,7 +17,7 @@ services:
     stdin_open: true
     tty: true
     env_file:
-      - ../env/.env.local
+      - ../env/.env.production
 
     depends_on:
       - server
@@ -35,5 +35,5 @@ services:
       - client
     # Uncomment and set these volumes if needed
     volumes:
-      - ../Nginx/production/ssl:/etc/letsencrypt/live/www.aceshighbitcoin.com
+      - ../Nginx/ssl:/etc/letsencrypt/live/www.aceshighbitcoin.com
       - ../Nginx/production/nginx.conf:/etc/nginx/nginx.conf
