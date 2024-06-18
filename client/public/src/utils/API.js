@@ -7,7 +7,7 @@ import { renderCirculationChart } from "../scripts/circulationChart.js";
 import { renderProgressBar } from "../scripts/halving.js";
 
 const getBTCData = () => {
-  return fetch("http://localhost:5000/data") // Replace with your server URL and endpoint
+  return fetch(process.env.API_SERVER) // Replace with your server URL and endpoint
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
